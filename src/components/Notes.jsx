@@ -11,7 +11,10 @@ function Notes(props) {
         const source = axios.CancelToken.source();
 
         axios
-            .get(`http://localhost:5001/notes/${authUser.uid}`, {
+            .get(`https://note-backend-chi.vercel.app/notes/${authUser.uid}`, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                },
                 cancelToken: source.token,
             })
             .then((res) => {
@@ -26,15 +29,23 @@ function Notes(props) {
         return () => {
             source.cancel();
         };
-    });
+    }, [authUser.uid]);
 
     function addNote(title, content) {
         axios
-            .post("http://localhost:5001/notes", {
-                title,
-                content,
-                uid: authUser.uid,
-            })
+            .post(
+                "https://note-backend-chi.vercel.app/notes",
+                {
+                    title,
+                    content,
+                    uid: authUser.uid,
+                },
+                {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                    },
+                }
+            )
             .then((res) => {
                 // console.log(res.data.createdNote);
                 setNotes([...currNotes, res.data.createdNote]);
@@ -46,7 +57,11 @@ function Notes(props) {
 
     function deleteNote(id) {
         axios
-            .delete(`http://localhost:5001/notes/${id}`)
+            .delete(`https://note-backend-chi.vercel.app/notes/${id}`, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                },
+            })
             .then((res) => {
                 // console.log(res.data);
                 setNotes(currNotes.filter((note) => note._id !== id));
@@ -69,10 +84,18 @@ function Notes(props) {
         );
 
         axios
-            .patch(`http://localhost:5001/notes/${id}`, {
-                title: updatedTitle,
-                content: updatedContent,
-            })
+            .patch(
+                `https://note-backend-chi.vercel.app/notes/${id}`,
+                {
+                    title: updatedTitle,
+                    content: updatedContent,
+                },
+                {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                    },
+                }
+            )
             .catch((err) => {
                 console.log(err);
                 setNotes(currNotes);

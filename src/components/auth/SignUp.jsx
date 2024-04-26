@@ -19,29 +19,22 @@ function SignUp() {
         setError("");
 
         const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                if (errorCode === "auth/weak-password") {
-                    setError("Password should be at least 6 characters");
-                } else if (errorCode === "auth/email-already-in-use") {
-                    setError("Email already registered");
-                } else if (errorCode === "auth/invalid-email") {
-                    setError("Invalid email");
-                } else if (errorCode === "auth/missing-password") {
-                    setError("Please enter password");
-                } else if (errorCode === "auth/missing-email") {
-                    setError("Please enter email");
-                }
-            });
+        createUserWithEmailAndPassword(auth, email, password).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+            if (errorCode === "auth/weak-password") {
+                setError("Password should be at least 6 characters");
+            } else if (errorCode === "auth/email-already-in-use") {
+                setError("Email already registered");
+            } else if (errorCode === "auth/invalid-email") {
+                setError("Invalid email");
+            } else if (errorCode === "auth/missing-password") {
+                setError("Please enter password");
+            } else if (errorCode === "auth/missing-email") {
+                setError("Please enter email");
+            }
+        });
     }
 
     return (

@@ -27,13 +27,9 @@ function App() {
     const [user, loading] = useAuthState(auth);
 
     function logOut() {
-        auth.signOut()
-            .then(() => {
-                console.log("Logged out");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        auth.signOut().catch((error) => {
+            console.log(error);
+        });
     }
 
     return (
