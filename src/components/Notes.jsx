@@ -7,11 +7,16 @@ function Notes(props) {
     const [currNotes, setNotes] = useState([]);
     const authUser = props.user;
 
+    const serverUrl =
+        process.env.REACT_APP_LOCAL === "true"
+            ? "http://localhost:8888"
+            : "https://note-backend-chi.vercel.app";
+
     useEffect(() => {
         const source = axios.CancelToken.source();
 
         axios
-            .get(`https://note-backend-chi.vercel.app/notes/${authUser.uid}`, {
+            .get(`${serverUrl}/notes/${authUser.uid}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                 },
@@ -29,12 +34,12 @@ function Notes(props) {
         return () => {
             source.cancel();
         };
-    }, [authUser.uid]);
+    }, [authUser.uid, serverUrl]);
 
     function addNote(title, content) {
         axios
             .post(
-                "https://note-backend-chi.vercel.app/notes",
+                `${serverUrl}/notes`,
                 {
                     title,
                     content,
@@ -57,7 +62,7 @@ function Notes(props) {
 
     function deleteNote(id) {
         axios
-            .delete(`https://note-backend-chi.vercel.app/notes/${id}`, {
+            .delete(`${serverUrl}/notes/${id}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                 },
@@ -85,7 +90,7 @@ function Notes(props) {
 
         axios
             .patch(
-                `https://note-backend-chi.vercel.app/notes/${id}`,
+                `${serverUrl}/notes/${id}`,
                 {
                     title: updatedTitle,
                     content: updatedContent,
