@@ -24,6 +24,8 @@ Create a `.env` file in the project directory containing the following keys:
 
 - `REACT_APP_APIKEY`, `REACT_APP_AUTHDOMAIN`, `REACT_APP_PROJECTID`, `REACT_APP_STORAGEBUCKET`, `REACT_APP_MESSAGINGSENDERID`, `REACT_APP_APPID`: All are the corresponding values used for Firebase Auth
 
+(Already created in the repo for grading purposes)
+
 
 
 In the project directory, you can run:
