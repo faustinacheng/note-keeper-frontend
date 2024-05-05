@@ -14,6 +14,10 @@ CSS Framework: Tailwind CSS (installation and usage guide: https://tailwindcss.c
 
 ## How to Run Locally
 
+**Requirements:**
+
+- Node.js installed (If not download it [here](https://nodejs.org/en/download/)).
+
 ### Setup
 
 To install the dependencies listed in `package.json`, run `npm install`.
@@ -66,6 +70,8 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 ## Deployment
 
 Deployed on Vercel: https://keeper-fc.vercel.app/
+
+Video Demo: https://youtu.be/ry--s5_ghmg
 
 ![image-20240504160215711](images/image-20240504160215711.png)
 
